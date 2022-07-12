@@ -1,0 +1,7 @@
+{
+  "name": "lg-code-challenge",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
