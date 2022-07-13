@@ -1,5 +1,5 @@
 <ion-slides pager="true" [options]="slideOpts">
   <ion-slide *ngFor="let image of images">
-    <img defaultImage="/assets/met_logo.png" [lazyLoad]="image">
+    <img defaultImage="/assets/met_logo.png" [lazyLoad]="image" errorImage="/assets/met_logo.png">
   </ion-slide>
 </ion-slides>

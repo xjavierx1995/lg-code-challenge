@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Departments, DepartmentsResponse } from 'src/app/core/classes/departments';
 import { Filter } from 'src/app/core/classes/filter';
 import { HomeService } from '../../home.service';
@@ -37,14 +37,18 @@ export class FiltersComponent implements OnInit {
   */
   doValidations(){
     this.filterForm = this.formBuilder.group({
-      q: new FormControl(''),
+      q: new FormControl('', Validators.required),
       departmentId: new FormControl(''),
       hasImages: new FormControl(),
     });
   }
 
   search(){
-    this.emitSearch.emit(this.filterForm.value)
+
+    this.filterForm.markAllAsTouched()
+    if (this.filterForm.valid) { 
+      this.emitSearch.emit(this.filterForm.value)
+    }
   }
 
 }

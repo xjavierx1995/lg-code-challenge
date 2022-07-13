@@ -8,6 +8,13 @@
         <ion-item>
           <ion-label position="floating" >Descripción</ion-label>
           <ion-input formControlName="q" maxlength="255" type="text"></ion-input>
+          <div *ngIf="filterForm.get('q').hasError('required') && filterForm.get('q').touched">
+            <small>
+              <ion-text color="danger">
+                Este campo es requerido
+              </ion-text>
+            </small>
+          </div>
         </ion-item>
 
         <ion-item>
