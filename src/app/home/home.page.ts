@@ -18,39 +18,51 @@ export class HomePage implements OnInit {
   constructor(
     public homeService: HomeService,
     private modalCtrl: ModalController
-  ) {}
+  ) { }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     // this.getObjects();
     this.getObjectsByDepartment(3);
   }
 
-  getObjects(){
+  getObjects() {
     this.homeService.getObjects().subscribe((res: ObjectResponse) => {
-      this.objectsList = res.objectIDs.slice(0, 10);
+      if (res.total > 0) {
+        this.objectsList = res.objectIDs.slice(0, 20);
+      } else {
+        this.objectsList = [];
+      }
     });
   }
 
-  getObjectsByDepartment(departmentId: number){
+  getObjectsByDepartment(departmentId: number) {
     this.homeService.getObjectsByDepartment(departmentId).subscribe((res: ObjectResponse) => {
-      this.objectsList = res.objectIDs.slice(0, 20);
+      if (res.total > 0) {
+        this.objectsList = res.objectIDs.slice(0, 20);
+      } else {
+        this.objectsList = [];
+      }
     });
   }
 
-  async openDetail(item: ObjectDetails){
-    
+  async openDetail(item: ObjectDetails) {
+
     const modal = await this.modalCtrl.create({
       component: DetailsComponent,
-      componentProps: {objectDetail: item}
+      componentProps: { objectDetail: item }
     });
     modal.present();
-    
+
   }
 
-  search(params: Filter){
+  search(params: Filter) {
     let filters = new Filter(params)
-    this.homeService.doSearch(filters).subscribe((res: ObjectResponse) =>{
-      this.objectsList = res.objectIDs.slice(0, 20);
+    this.homeService.doSearch(filters).subscribe((res: ObjectResponse) => {
+      if (res.total > 0) {
+        this.objectsList = res.objectIDs.slice(0, 20);
+      } else {
+        this.objectsList = [];
+      };
     })
   }
 }

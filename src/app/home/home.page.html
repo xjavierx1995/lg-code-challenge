@@ -9,13 +9,9 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-list-header> Recent Conversations </ion-list-header>
-
-    <!-- <ion-virtual-scroll [items]="objectsList?.objectIDs" approxItemHeight="320px"> -->
+    <ion-list-header> Artículos encontrados </ion-list-header>
       <div *ngFor="let item of objectsList">
         <app-item-list [objectId]="item" (emitDetail)="openDetail($event)"></app-item-list>
       </div>
-    <!-- </ion-virtual-scroll> -->
-
   </ion-list>
 </ion-content>
