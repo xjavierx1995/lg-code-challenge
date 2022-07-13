@@ -10,34 +10,17 @@ import { HomeService } from '../../home.service';
 })
 export class DetailsComponent implements OnInit {
 
-  name: string;
-  @Input() objectId: number;
-
-  objectDetail: ObjectDetails = new ObjectDetails();
+  @Input() objectDetail: ObjectDetails;
 
   constructor(
     private modalCtrl: ModalController,
     public homeService: HomeService
     ) {}
 
-  ngOnInit(): void{
-    this.getObjectById();
-  }
-
-  getObjectById(){
-    this.homeService.getObjectById(this.objectId).subscribe((res: ObjectDetails) => {
-      console.log(res);
-      this.objectDetail = new ObjectDetails(res);
-    });
-    
-  }
+  ngOnInit(): void{ }
 
   close() {
-    return this.modalCtrl.dismiss(null, '');
-  }
-
-  confirm() {
-    return this.modalCtrl.dismiss(this.name, 'confirm');
+    return this.modalCtrl.dismiss();
   }
 
 }

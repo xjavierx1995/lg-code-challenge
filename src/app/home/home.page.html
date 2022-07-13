@@ -11,11 +11,11 @@
   <ion-list>
     <ion-list-header> Recent Conversations </ion-list-header>
 
-    <ion-virtual-scroll [items]="objectsList?.objectIDs" approxItemHeight="320px">
-      <div *virtualItem="let item">
-        <app-item-list [objectId]="item"></app-item-list>
+    <!-- <ion-virtual-scroll [items]="objectsList?.objectIDs" approxItemHeight="320px"> -->
+      <div *ngFor="let item of objectsList">
+        <app-item-list [objectId]="item" (emitDetail)="openDetail($event)"></app-item-list>
       </div>
-    </ion-virtual-scroll>
+    <!-- </ion-virtual-scroll> -->
 
   </ion-list>
 </ion-content>

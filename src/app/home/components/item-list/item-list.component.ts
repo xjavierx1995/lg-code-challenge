@@ -27,8 +27,8 @@ export class ItemListComponent implements OnInit {
     
   }
 
-  openDetail(item){
-    console.log(item);
+  openDetail(item: ObjectDetails){
+    this.emitDetail.emit(item);
   }
 
 }
