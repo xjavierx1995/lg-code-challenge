@@ -9,6 +9,7 @@ import { DetailsComponent } from './modals/details/details.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { SliderImageComponent } from './components/slider-image/slider-image.component';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { ItemListComponent } from './components/item-list/item-list.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     HomePage,
     DetailsComponent,
     FiltersComponent,
-    SliderImageComponent
+    SliderImageComponent,
+    ItemListComponent
   ]
 })
 export class HomePageModule {}

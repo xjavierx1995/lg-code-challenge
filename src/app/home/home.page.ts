@@ -20,7 +20,8 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit(): void{
-    this.getObjectsByDepartment();
+    // this.getObjects();
+    this.getObjectsByDepartment(3);
   }
 
   getObjects(){
@@ -29,8 +30,8 @@ export class HomePage implements OnInit {
     });
   }
 
-  getObjectsByDepartment(){
-    this.homeService.getObjectsByDepartment('1').subscribe((res: ObjectResponse) => {
+  getObjectsByDepartment(departmentId: number){
+    this.homeService.getObjectsByDepartment(departmentId).subscribe((res: ObjectResponse) => {
       this.objectsList = res
     });
   }
