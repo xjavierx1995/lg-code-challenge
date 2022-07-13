@@ -1,0 +1,31 @@
+<ion-accordion-group>
+  <ion-accordion value="first">
+    <ion-item slot="header" color="light">
+      <ion-label>Filtros de búsqueda</ion-label>
+    </ion-item>
+    <div class="ion-padding" slot="content">
+      <form [formGroup]="filterForm">
+        <ion-item>
+          <ion-label position="floating" >Descripción</ion-label>
+          <ion-input formControlName="q" maxlength="255" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating" >Departamento</ion-label>
+          <ion-select formControlName="departmentId" interface="popover" [multiple]="true">
+            <ion-select-option *ngFor="let department of departments" [value]="department.departmentId">
+              {{ department.displayName }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Con imagen</ion-label>
+          <ion-checkbox slot="end" formControlName="hasImages" indeterminate></ion-checkbox>
+        </ion-item>
+
+        <ion-button expand="block" (click)="search()">Filtrar</ion-button>
+      </form>
+    </div>
+  </ion-accordion>
+</ion-accordion-group>

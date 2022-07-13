@@ -1,20 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      The Metropolitan Museum of Art
     </ion-title>
   </ion-toolbar>
+  <app-filters (emitSearch)="search($event)"></app-filters>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list>
+    <ion-list-header> Recent Conversations </ion-list-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <ion-virtual-scroll [items]="objectsList?.objectIDs">
+      <div *virtualItem="let item">
+        <ion-item button (click)="openDetail(item)">
+          <ion-avatar slot="start">
+            <img src="./avatar-finn.png" />
+          </ion-avatar>
+          <ion-label>
+            <h2>Finn</h2>
+            <h3>I'm a big deal</h3>
+            <p>{{item}}</p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </ion-virtual-scroll>
+
+  </ion-list>
 </ion-content>
