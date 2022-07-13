@@ -1,17 +1,29 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
-    </ion-buttons>
-    <ion-title>Welcome</ion-title>
+    <ion-title>{{ objectDetail.objectName ? objectDetail.objectName : objectDetail.title }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="confirm()">Confirm</ion-button>
+      <ion-button (click)="close()">
+        <ion-icon slot="end" name="close"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-label position="stacked">Your name</ion-label>
-    <ion-input [(ngModel)]="name" placeholder="Your name"></ion-input>
-  </ion-item>
+
+    <ion-card>
+      <img defaultImage="/assets/met_logo.png" [lazyLoad]="objectDetail.primaryImage" />
+      <ion-card-header>
+        <ion-card-subtitle>{{objectDetail.department}}</ion-card-subtitle>
+        <ion-card-title>{{ objectDetail.title }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-list-header *ngIf="objectDetail.artistDisplayName"> Artista: {{ objectDetail.artistDisplayName }} </ion-list-header>
+
+      <ion-card-content>
+        <app-slider-image [images]="objectDetail.additionalImages"></app-slider-image>
+
+        <p> Ubicación: {{ objectDetail.repository }} </p>
+      </ion-card-content>
+    </ion-card>
+
 </ion-content>
