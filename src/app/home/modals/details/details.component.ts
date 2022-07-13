@@ -19,6 +19,11 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void{ }
 
+  /**
+   * The function close() is a method of the class ModalPage. It returns the modalCtrl.dismiss()
+   * method.
+   * @returns The modalCtrl.dismiss() method is being returned.
+   */
   close() {
     return this.modalCtrl.dismiss();
   }

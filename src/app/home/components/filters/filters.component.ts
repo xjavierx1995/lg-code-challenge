@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Departments, DepartmentsResponse } from 'src/app/core/classes/departments';
 import { Filter } from 'src/app/core/classes/filter';
 import { HomeService } from '../../home.service';
@@ -25,6 +25,12 @@ export class FiltersComponent implements OnInit {
     this.doValidations();
   }
 
+  /**
+   * The function getDepartments() is a function that is called when the component is initialized. It
+   * calls the getDepartments() function in the homeService.ts file, which returns an observable of
+   * type DepartmentsResponse. The observable is then subscribed to, and the departments property of
+   * the component is set to the departments property of the DepartmentsResponse object.
+   */
   getDepartments(){
     this.homeService.getDepartments().subscribe((res: DepartmentsResponse) => {
       this.departments = res.departments;
@@ -37,14 +43,21 @@ export class FiltersComponent implements OnInit {
   */
   doValidations(){
     this.filterForm = this.formBuilder.group({
-      q: new FormControl(''),
+      q: new FormControl('', Validators.required),
       departmentId: new FormControl(''),
       hasImages: new FormControl(),
     });
   }
 
+  /**
+   * If the form is valid, emit the form value.
+   */
   search(){
-    this.emitSearch.emit(this.filterForm.value)
+
+    this.filterForm.markAllAsTouched()
+    if (this.filterForm.valid) { 
+      this.emitSearch.emit(this.filterForm.value)
+    }
   }
 
 }

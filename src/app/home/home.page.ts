@@ -18,39 +18,67 @@ export class HomePage implements OnInit {
   constructor(
     public homeService: HomeService,
     private modalCtrl: ModalController
-  ) {}
+  ) { }
 
-  ngOnInit(): void{
-    // this.getObjects();
+  ngOnInit(): void {
     this.getObjectsByDepartment(3);
   }
 
-  getObjects(){
+  /**
+   * It gets a list of objects from the server and assigns it to the objectsList variable.
+   */
+  getObjects() {
     this.homeService.getObjects().subscribe((res: ObjectResponse) => {
-      this.objectsList = res.objectIDs.slice(0, 10);
+      if (res.total > 0) {
+        this.objectsList = res.objectIDs.slice(0, 20);
+      } else {
+        this.objectsList = [];
+      }
     });
   }
 
-  getObjectsByDepartment(departmentId: number){
+  /**
+   * It gets a list of objects by department ID.
+   * @param {number} departmentId - number - the id of the department
+   */
+  getObjectsByDepartment(departmentId: number) {
     this.homeService.getObjectsByDepartment(departmentId).subscribe((res: ObjectResponse) => {
-      this.objectsList = res.objectIDs.slice(0, 20);
+      if (res.total > 0) {
+        this.objectsList = res.objectIDs.slice(0, 20);
+      } else {
+        this.objectsList = [];
+      }
     });
   }
 
-  async openDetail(item: ObjectDetails){
-    
+  /**
+   * It creates a modal with the DetailsComponent component, and passes the objectDetail object to the
+   * component.
+   * @param {ObjectDetails} item - ObjectDetails
+   */
+  async openDetail(item: ObjectDetails) {
+
     const modal = await this.modalCtrl.create({
       component: DetailsComponent,
-      componentProps: {objectDetail: item}
+      componentProps: { objectDetail: item }
     });
     modal.present();
-    
+
   }
 
-  search(params: Filter){
+  /**
+   * It takes a Filter object, creates a new Filter object, and then passes that new Filter object to a
+   * service that returns an ObjectResponse object.
+   * @param {Filter} params - Filter
+   */
+  search(params: Filter) {
     let filters = new Filter(params)
-    this.homeService.doSearch(filters).subscribe((res: ObjectResponse) =>{
-      this.objectsList = res.objectIDs.slice(0, 20);
+    this.homeService.doSearch(filters).subscribe((res: ObjectResponse) => {
+      if (res.total > 0) {
+        this.objectsList = res.objectIDs.slice(0, 20);
+      } else {
+        this.objectsList = [];
+      };
     })
   }
 }
