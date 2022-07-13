@@ -25,6 +25,12 @@ export class FiltersComponent implements OnInit {
     this.doValidations();
   }
 
+  /**
+   * The function getDepartments() is a function that is called when the component is initialized. It
+   * calls the getDepartments() function in the homeService.ts file, which returns an observable of
+   * type DepartmentsResponse. The observable is then subscribed to, and the departments property of
+   * the component is set to the departments property of the DepartmentsResponse object.
+   */
   getDepartments(){
     this.homeService.getDepartments().subscribe((res: DepartmentsResponse) => {
       this.departments = res.departments;
@@ -43,6 +49,9 @@ export class FiltersComponent implements OnInit {
     });
   }
 
+  /**
+   * If the form is valid, emit the form value.
+   */
   search(){
 
     this.filterForm.markAllAsTouched()

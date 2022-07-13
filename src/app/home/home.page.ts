@@ -21,10 +21,12 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.getObjects();
     this.getObjectsByDepartment(3);
   }
 
+  /**
+   * It gets a list of objects from the server and assigns it to the objectsList variable.
+   */
   getObjects() {
     this.homeService.getObjects().subscribe((res: ObjectResponse) => {
       if (res.total > 0) {
@@ -35,6 +37,10 @@ export class HomePage implements OnInit {
     });
   }
 
+  /**
+   * It gets a list of objects by department ID.
+   * @param {number} departmentId - number - the id of the department
+   */
   getObjectsByDepartment(departmentId: number) {
     this.homeService.getObjectsByDepartment(departmentId).subscribe((res: ObjectResponse) => {
       if (res.total > 0) {
@@ -45,6 +51,11 @@ export class HomePage implements OnInit {
     });
   }
 
+  /**
+   * It creates a modal with the DetailsComponent component, and passes the objectDetail object to the
+   * component.
+   * @param {ObjectDetails} item - ObjectDetails
+   */
   async openDetail(item: ObjectDetails) {
 
     const modal = await this.modalCtrl.create({
@@ -55,6 +66,11 @@ export class HomePage implements OnInit {
 
   }
 
+  /**
+   * It takes a Filter object, creates a new Filter object, and then passes that new Filter object to a
+   * service that returns an ObjectResponse object.
+   * @param {Filter} params - Filter
+   */
   search(params: Filter) {
     let filters = new Filter(params)
     this.homeService.doSearch(filters).subscribe((res: ObjectResponse) => {

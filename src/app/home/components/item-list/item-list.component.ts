@@ -20,6 +20,9 @@ export class ItemListComponent implements OnInit {
     this.getObjectById();
   }
 
+  /**
+   * The function gets an object by its id and assigns it to the objectDetail variable.
+   */
   getObjectById(){
     this.homeService.getObjectById(this.objectId).subscribe((res: ObjectDetails) => {
       this.objectDetail = new ObjectDetails(res);
@@ -27,6 +30,11 @@ export class ItemListComponent implements OnInit {
     
   }
 
+  /**
+   * When the user clicks on a list item, the item's details are emitted to the parent component.
+   * @param {ObjectDetails} item - ObjectDetails - this is the object that is being passed to the
+   * parent component
+   */
   openDetail(item: ObjectDetails){
     this.emitDetail.emit(item);
   }
