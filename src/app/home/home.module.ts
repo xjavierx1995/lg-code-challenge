@@ -7,6 +7,8 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { DetailsComponent } from './modals/details/details.component';
 import { FiltersComponent } from './components/filters/filters.component';
+import { SliderImageComponent } from './components/slider-image/slider-image.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 
 @NgModule({
@@ -15,12 +17,14 @@ import { FiltersComponent } from './components/filters/filters.component';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LazyLoadImageModule
   ],
   declarations: [
     HomePage,
     DetailsComponent,
-    FiltersComponent
+    FiltersComponent,
+    SliderImageComponent
   ]
 })
 export class HomePageModule {}

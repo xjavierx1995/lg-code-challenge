@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Filter } from '../core/classes/filter';
-import { ObjectResponse } from '../core/classes/object';
+import { ObjectResponse } from '../core/classes/objectResponse';
 import { HomeService } from './home.service';
 import { DetailsComponent } from './modals/details/details.component';
 
@@ -36,10 +36,10 @@ export class HomePage implements OnInit {
   }
 
   async openDetail(item){
-    console.log(item);
     
     const modal = await this.modalCtrl.create({
       component: DetailsComponent,
+      componentProps: {objectId: item}
     });
     modal.present();
 

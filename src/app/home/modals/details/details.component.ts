@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { ObjectDetails } from 'src/app/core/classes/object-details';
+import { HomeService } from '../../home.service';
 
 @Component({
   selector: 'app-details',
@@ -9,13 +11,29 @@ import { ModalController } from '@ionic/angular';
 export class DetailsComponent implements OnInit {
 
   name: string;
+  @Input() objectId: number;
 
-  constructor(private modalCtrl: ModalController) {}
+  objectDetail: ObjectDetails = new ObjectDetails();
 
-  ngOnInit(): void{  }
+  constructor(
+    private modalCtrl: ModalController,
+    public homeService: HomeService
+    ) {}
 
-  cancel() {
-    return this.modalCtrl.dismiss(null, 'cancel');
+  ngOnInit(): void{
+    this.getObjectById();
+  }
+
+  getObjectById(){
+    this.homeService.getObjectById(this.objectId).subscribe((res: ObjectDetails) => {
+      console.log(res);
+      this.objectDetail = new ObjectDetails(res);
+    });
+    
+  }
+
+  close() {
+    return this.modalCtrl.dismiss(null, '');
   }
 
   confirm() {
