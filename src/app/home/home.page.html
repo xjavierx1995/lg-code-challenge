@@ -4,16 +4,7 @@
       The Metropolitan Museum of Art
     </ion-title>
   </ion-toolbar>
-  <ion-accordion-group>
-    <ion-accordion value="first">
-      <ion-item slot="header" color="light">
-        <ion-label>First Accordion</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        First Content
-      </div>
-    </ion-accordion>
-  </ion-accordion-group>
+  <app-filters (emitSearch)="search($event)"></app-filters>
 </ion-header>
 
 <ion-content [fullscreen]="true">

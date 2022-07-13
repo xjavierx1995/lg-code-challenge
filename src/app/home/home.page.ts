@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Filter } from '../core/classes/filter';
 import { ObjectResponse } from '../core/classes/object';
 import { HomeService } from './home.service';
 import { DetailsComponent } from './modals/details/details.component';
@@ -11,7 +12,7 @@ import { DetailsComponent } from './modals/details/details.component';
 })
 export class HomePage implements OnInit {
 
-  objectsList: ObjectResponse; //TODO: crear interfaz
+  objectsList: ObjectResponse;
 
   constructor(
     public homeService: HomeService,
@@ -46,5 +47,12 @@ export class HomePage implements OnInit {
 
     console.log(data, role);
     
+  }
+
+  search(params: Filter){
+    let filters = new Filter(params)
+    this.homeService.doSearch(filters).subscribe((res: ObjectResponse) =>{
+      this.objectsList = res
+    })
   }
 }
