@@ -1,0 +1,10 @@
+<ion-item button (click)="openDetail(objectDetail)">
+  <ion-avatar slot="start">
+    <img defaultImage="/assets/met_logo.png" [lazyLoad]="objectDetail.primaryImageSmall" />
+  </ion-avatar>
+  <ion-label>
+    <!-- <h2>Finn</h2> -->
+    <h3>{{ objectDetail.objectName ? objectDetail.objectName : objectDetail.title }}</h3>
+    <!-- <p>{{objectDetail.objectID}}</p> -->
+  </ion-label>
+</ion-item>

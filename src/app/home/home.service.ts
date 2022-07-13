@@ -19,8 +19,7 @@ export class HomeService{
     return this.http.get(environment.API_URL + `objects/${objectId}`);
   }
 
-  getObjectsByDepartment(departmentIds: string){
-    departmentIds = '3';
+  getObjectsByDepartment(departmentIds: number){
     let queryParams = new HttpParams().set("departmentIds", departmentIds);
     return this.http.get(environment.API_URL + "objects", {params: queryParams});
   }

@@ -15,9 +15,6 @@ export class SliderImageComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    console.log(this.images);
-    
-  }
+  ngOnInit() { }
 
 }

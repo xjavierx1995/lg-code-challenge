@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Filter } from '../core/classes/filter';
+import { ObjectDetails } from '../core/classes/object-details';
 import { ObjectResponse } from '../core/classes/objectResponse';
 import { HomeService } from './home.service';
 import { DetailsComponent } from './modals/details/details.component';
@@ -12,7 +13,7 @@ import { DetailsComponent } from './modals/details/details.component';
 })
 export class HomePage implements OnInit {
 
-  objectsList: ObjectResponse;
+  objectsList: number[];
 
   constructor(
     public homeService: HomeService,
@@ -20,39 +21,36 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit(): void{
-    this.getObjectsByDepartment();
+    // this.getObjects();
+    this.getObjectsByDepartment(3);
   }
 
   getObjects(){
     this.homeService.getObjects().subscribe((res: ObjectResponse) => {
-      this.objectsList = res
+      this.objectsList = res.objectIDs.slice(0, 10);
     });
   }
 
-  getObjectsByDepartment(){
-    this.homeService.getObjectsByDepartment('1').subscribe((res: ObjectResponse) => {
-      this.objectsList = res
+  getObjectsByDepartment(departmentId: number){
+    this.homeService.getObjectsByDepartment(departmentId).subscribe((res: ObjectResponse) => {
+      this.objectsList = res.objectIDs.slice(0, 20);
     });
   }
 
-  async openDetail(item){
+  async openDetail(item: ObjectDetails){
     
     const modal = await this.modalCtrl.create({
       component: DetailsComponent,
-      componentProps: {objectId: item}
+      componentProps: {objectDetail: item}
     });
     modal.present();
-
-    const { data, role } = await modal.onWillDismiss();
-
-    console.log(data, role);
     
   }
 
   search(params: Filter){
     let filters = new Filter(params)
     this.homeService.doSearch(filters).subscribe((res: ObjectResponse) =>{
-      this.objectsList = res
+      this.objectsList = res.objectIDs.slice(0, 20);
     })
   }
 }
